@@ -8,9 +8,9 @@ clc
 info.anlys = '0401';
 
 % load data
-info.sub_name = 'Sub04';
+info.sub_name = 'Sub02';
 info.trainingSet = 'o'; % trainng set 1 = 'o'; training set 2 = 'bfo'; training set 3 = 'bf'
-info.sessionNum = 1:20; % number of sessions
+info.sessionNum = 1:30; % number of sessions
 if info.trainingSet == 'o'
     info.trainingName = 'Training Set 1';
 elseif info.trainingSet == 'bfo'
@@ -109,16 +109,32 @@ end
 % grand average
 
 % multilevel 1-D wavelet decomposition
-val.wname = 'db1'; % type
+% val.wname = 'sym8'; % type
+% val.level = 4; % level; scale = 2^n
+% val.wname = 'db2'; % type
+% val.level = 4; % level; scale = 2^n
+% val.wname = 'db1'; % type
+% val.level = 8; % level; scale = 2^n
+% val.wname = 'db4'; % type
+% val.level = 3; % level; scale = 2^n
+% val.wname = 'db4'; % type
+% val.level = 6; % level; scale = 2^n
+% val.wname = 'db5'; % type
+% val.level = 5; % level; scale = 2^n
+% val.wname = 'db10'; % type
+% val.level = 8; % level; scale = 2^n
+% val.wname = 'sym4'; % type
+% val.level = 8; % level; scale = 2^n
+val.wname = 'sym5'; % type
 val.level = 8; % level; scale = 2^n
 flag.dwt_avg = 0; % grand average; 0 = off; 1 = on
 flag.plot_dwt = 0; % plot; 5 = DWT
 flag.dwt_anlys = 2; % analysis; 0 = off; 1 = on
 if flag.dwt_anlys == 1 || flag.dwt_anlys == 2 
     temp.dwt_m = 4; % motion
-    temp.dwt_s = 1:10; % session
+    temp.dwt_s = 21:30; % session
     if flag.dwt_anlys == 2
-        temp.dwt_ch = 1; % channel
+        temp.dwt_ch = 3; % channel
     end
     flag.dwt_ylim = 0; % ylim; 0 = off; 1 = on
     temp.dwt_ylim = [-4E6 4E6];
