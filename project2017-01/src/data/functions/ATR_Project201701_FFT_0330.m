@@ -55,15 +55,15 @@ end
 if flag.FFT_anlys == 1
     for temp_m = temp.FFT_m % motion; 1:eval(sprintf('size(data(%d).task_%s, 2)', temp_s, temp.ty))
         figure;
-        for temp_ch = 1eval(sprintf('size(data(%d).task_%s{1, %d}, 2)', temp_s, temp.ty, temp_m)) % channel
+        for temp_ch = 1:eval(sprintf('size(data(%d).task_%s{1, %d}, 2)', temp_s, temp.ty, temp_m)) % channel
             eval(sprintf('subplot(5, 1, %d)', temp_ch));
             for temp_s = temp.FFT_s % number of session; size(data, 2)
                 eval(sprintf('plot(val2(%d).P1_fft_%s{1, %d}(: , %d))', temp_s, temp.ty, temp_m, temp_ch));
                 if temp_s == 1
                     hold on;
-                    xlim(temp.FFT_xlim)
+%                     xlim(temp.FFT_xlim)
                     if flag.FFT_ylim == 1;
-                        ylim([-4E6 4E6])
+                        ylim(temp.FFT_ylim)
                     end
                 end
             end
