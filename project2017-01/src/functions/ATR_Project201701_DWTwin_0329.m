@@ -82,7 +82,7 @@ end
 
 %% save
 % output_data.temp_dwt = zeros(max(info.sessionNum) * 10, temp.win * 5 * size(val2(1).cd1_dwt{1, 1}, 1) + 1);
-output_data.temp_dwt = zeros(max(info.sessionNum) * 10, temp.win * 5 * size(val2(1).cd1_coeff{1, 1}{1, 1}, 2) + 1);
+output_data.temp_dwt = zeros(max(info.sessionNum) * 10, 5 * size(val2(1).cd1_coeff{1, 1}{1, 1}, 2) + 1);
 
 for temp_m = 1:size(val2(1).cd1_dwt, 2) % motion
     ATR_Project201701_Motion_0329;
@@ -101,11 +101,16 @@ for temp_m = 1:size(val2(1).cd1_dwt, 2) % motion
 end
 
 % merge into a single file
-temp.variable = cell(1, size(val2(1).cd1_dwt{1, 1}, 2) * temp.win); % val2(1).cd1_dwt{1, 1}{1, 1}
-%     temp.variable{1, 1} = {'Class'};
+% temp.variable = cell(1, size(val2(1).cd1_dwt{1, 1}, 2) * temp.win); % val2(1).cd1_dwt{1, 1}{1, 1}
+% for temp_ch = 1:size(val2(temp_s).cd1_dwt{1, 1}, 2)
+%     for temp_coeff = 1:temp.win
+%         temp.variable{1, temp.win * (temp_ch - 1) + temp_coeff} = ['ch', num2str(temp_ch), '_' num2str(temp_coeff)];
+%     end
+% end
+temp.variable = cell(1, size(val2(1).cd1_coeff{1, 1}{1, 1}, 2) * 5); % val2(1).cd1_dwt{1, 1}{1, 1}
 for temp_ch = 1:size(val2(temp_s).cd1_dwt{1, 1}, 2)
-    for temp_coeff = 1:temp.win
-        temp.variable{1, temp.win * (temp_ch - 1) + temp_coeff} = ['ch', num2str(temp_ch), '_' num2str(temp_coeff)];
+    for temp_coeff = 1:size(val2(1).cd1_coeff{1, 1}{1, 1}, 2)
+        temp.variable{1, temp_coeff + size(val2(1).cd1_coeff{1, 1}{1, 1}, 2) * (temp_ch - 1)} = ['ch', num2str(temp_ch), '_' num2str(temp_coeff)];
     end
 end
 temp.row = cell(size(output_data.temp_dwt, 1), 1);
